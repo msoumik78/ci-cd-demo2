@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javalin-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: javalin-app
+  template:
+    metadata:
+      labels:
+        app: javalin-app
+    spec:
+      containers:
+        - name: javalin-app
+          image: msoumik78/javalin:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 7070

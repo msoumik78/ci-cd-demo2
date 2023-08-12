@@ -1,0 +1,13 @@
+Steps :
+======================
+1) First create a package of the app locally : mvn clean package -DskipTests
+2) Then create a docker image using the docker file :  docker build -t javalin-app .
+3) Then retag the app to push it to docker hub (assuming already logged in to docker hub) :docker tag javalin-app msoumik78/javalin
+4) Then delete the previous kubernetes deployment : kubectl delete deployment javalin-app
+5) Then create the deployment afresh using the command : kubectl apply-f deployment.yml
+6) Then create the service (LoadBalancer) using the command : kubectl apply -f service.yml
+7) Then in a seperate terminal , issue this command : minikube tunnel
+8) Then issue the command : kubectl get services
+
+Above command should list the "External IP" of the newly created javalin-service.
+The app can be accesssed using the URL : http://<External-IP>:7070
